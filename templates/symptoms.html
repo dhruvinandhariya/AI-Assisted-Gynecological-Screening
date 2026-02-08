@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Symptom Assessment</title>
+</head>
+<body>
+
+<h2>Symptom Assessment</h2>
+
+<form action="/symptoms" method="POST">
+
+<h3>Pain Symptoms</h3>
+Pelvic pain:
+<select name="pelvic_pain"><option>no</option><option>yes</option></select><br>
+
+Menstrual pain:
+<select name="menstrual_pain"><option>no</option><option>yes</option></select><br>
+
+Lower back pain:
+<select name="lower_back_pain"><option>no</option><option>yes</option></select><br>
+
+Activity-related pain:
+<select name="activity_related_pain"><option>no</option><option>yes</option></select><br><br>
+
+Pain frequency:
+<select name="pain_frequency">
+<option>never</option>
+<option>rarely</option>
+<option>occasionally</option>
+<option>daily</option>
+<option>constant</option>
+</select><br><br>
+
+<h3>Pain Triggers (select all)</h3>
+<input type="checkbox" name="pain_triggers" value="menstruation"> Menstruation<br>
+<input type="checkbox" name="pain_triggers" value="ovulation"> Ovulation<br>
+<input type="checkbox" name="pain_triggers" value="sexual intercourse"> Sexual intercourse<br>
+<input type="checkbox" name="pain_triggers" value="bowel movements"> Bowel movements<br>
+<input type="checkbox" name="pain_triggers" value="urination"> Urination<br>
+<input type="checkbox" name="pain_triggers" value="physical activity"> Physical activity<br>
+<input type="checkbox" name="pain_triggers" value="stress"> Stress<br>
+<input type="checkbox" name="pain_triggers" value="prolonged sitting"> Prolonged sitting<br>
+<input type="checkbox" name="pain_triggers" value="other"> Other<br><br>
+
+<h3>Menstrual History</h3>
+Cycle irregularity:
+<select name="cycle_irregularity">
+<option>no irregular</option>
+<option>occasionally irregular</option>
+<option>frequently irregular</option>
+<option>very irregular</option>
+</select><br>
+
+Menstrual flow:
+<select name="menstrual_flow">
+<option>light</option>
+<option>moderate</option>
+<option>heavy</option>
+<option>very heavy</option>
+<option>variable</option>
+</select><br>
+
+Bleeding duration:
+<select name="bleeding_duration">
+<option>1-2 days</option>
+<option>3-4 days</option>
+<option>5-7 days</option>
+<option>8-10 days</option>
+<option>more than 10 days</option>
+<option>variable</option>
+</select><br><br>
+
+<h3>Severity</h3>
+Fatigue severity (0–10):
+<input type="number" name="fatigue" min="0" max="10"><br>
+
+Digestive discomfort severity (0–10):
+<input type="number" name="digestive_severity" min="0" max="10"><br><br>
+
+<h3>Digestive Symptoms (select all)</h3>
+<input type="checkbox" name="digestive_symptoms" value="bloating"> Bloating<br>
+<input type="checkbox" name="digestive_symptoms" value="abdominal cramping"> Abdominal cramping<br>
+<input type="checkbox" name="digestive_symptoms" value="constipation"> Constipation<br>
+<input type="checkbox" name="digestive_symptoms" value="diarrhea"> Diarrhea<br>
+<input type="checkbox" name="digestive_symptoms" value="nausea"> Nausea<br>
+<input type="checkbox" name="digestive_symptoms" value="painful bowel movements"> Painful bowel movements<br>
+<input type="checkbox" name="digestive_symptoms" value="rectal pain"> Rectal pain<br>
+<input type="checkbox" name="digestive_symptoms" value="other"> Other<br><br>
+
+<h3>Impact & History</h3>
+Daily impact:
+<select name="daily_impact">
+<option>no impact</option>
+<option>minimal impact</option>
+<option>moderate impact</option>
+<option>significant impact</option>
+<option>severe impact</option>
+</select><br>
+
+Family history:
+<select name="family_history">
+<option>no</option>
+<option>yes-first degree</option>
+<option>yes-other relative</option>
+<option>unknown</option>
+</select><br>
+
+Previous diagnosis:
+<select name="previous_diagnosis">
+<option>no</option>
+<option>yes-confirmed</option>
+<option>yes-suspected</option>
+<option>unknown</option>
+</select><br><br>
+
+<button type="submit">Submit Symptoms</button>
+
+</form>
+
+</body>
+</html>

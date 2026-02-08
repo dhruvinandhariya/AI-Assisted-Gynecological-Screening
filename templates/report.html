@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Patient Screening Report</title>
+    <style>
+        body { font-family: Arial; margin: 40px; color: #222; }
+        .header {
+            border-bottom: 3px solid #8B0000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .hospital {
+            font-size: 24px;
+            font-weight: bold;
+            color: #8B0000;
+        }
+        .section {
+            margin-top: 22px;
+        }
+        .section h3 {
+            color: #8B0000;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 4px;
+        }
+        .risk {
+            font-size: 20px;
+            font-weight: bold;
+            color: #B00000;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+        }
+        td, th {
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        .normal {
+            color: green;
+            font-weight: bold;
+        }
+        .abnormal {
+            color: red;
+            font-weight: bold;
+        }
+        .download {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="hospital">Women’s Health Care Center</div>
+    <div>AI-Assisted Gynecological Screening Report</div>
+</div>
+
+<div class="section">
+    <b>Report ID:</b> {{ data.report_id }}<br>
+    <b>Date:</b> {{ data.date }}
+</div>
+
+<!-- ================= SYMPTOMS ================= -->
+<div class="section">
+    <h3>1. Symptom Summary</h3>
+    <p>
+        A structured symptom assessment was conducted based on patient-reported
+        information, including pain characteristics, menstrual history,
+        digestive symptoms, and impact on daily activities.
+    </p>
+</div>
+
+<!-- ================= PAIN SCALE INTERPRETATION ================= -->
+<div class="section">
+    <h3>2. Pain Assessment (Clinical Interpretation)</h3>
+
+    <table>
+        <tr>
+            <th>Pain Scale (0–10)</th>
+            <th>Clinical Meaning</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>0 – 3</td>
+            <td class="normal">Normal / Mild Pain</td>
+            <td>
+                Occasional or mild discomfort that does not interfere
+                with routine daily activities.
+            </td>
+        </tr>
+        <tr>
+            <td>4 – 6</td>
+            <td class="abnormal">Moderate Pain</td>
+            <td>
+                Persistent pain causing noticeable limitation in daily activities.
+            </td>
+        </tr>
+        <tr>
+            <td>7 – 10</td>
+            <td class="abnormal">Severe Pain</td>
+            <td>
+                Continuous or intense pain significantly affecting quality of life.
+            </td>
+        </tr>
+    </table>
+
+    <p style="margin-top:12px;">
+        <b>Assessment Result:</b>
+        {% if data.risk_score >= 6 %}
+            <span class="abnormal">
+                The reported symptom pattern corresponds to a
+                <b>moderate-to-severe pain level (≥4/10)</b>,
+                which is considered clinically abnormal.
+            </span>
+        {% else %}
+            <span class="normal">
+                The reported symptom pattern corresponds to a
+                <b>mild pain level (≤3/10)</b>, within normal clinical limits.
+            </span>
+        {% endif %}
+    </p>
+</div>
+
+<!-- ================= IMAGING ================= -->
+<div class="section">
+    <h3>3. Imaging Findings</h3>
+
+    {% if data.findings %}
+    <table>
+        <tr>
+            <th>Imaging Modality</th>
+            <th>Finding</th>
+            <th>Model Confidence</th>
+        </tr>
+        {% for f in data.findings %}
+        <tr>
+            <td>{{ 'Ultrasound' if 'Ultrasound' in f else 'Endoscopy' }}</td>
+            <td>{{ f }}</td>
+            <td>{{ data.confidences[loop.index0] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>No imaging data was provided for this assessment.</p>
+    {% endif %}
+</div>
+
+<!-- ================= RISK ================= -->
+<div class="section">
+    <h3>4. Overall Clinical Risk Assessment</h3>
+    <div class="risk">{{ data.risk_level }}</div>
+    <p>
+        The overall risk score is <b>{{ data.risk_score }}</b>, derived from
+        symptom severity and imaging findings (when available).
+    </p>
+</div>
+
+<!-- ================= RECOMMENDATIONS ================= -->
+<div class="section">
+    <h3>5. Clinical Recommendations</h3>
+    <ul>
+        <li>Consult a qualified gynecologist for further evaluation</li>
+        <li>Share this report with your healthcare provider</li>
+        <li>Additional diagnostic tests may be recommended if symptoms persist</li>
+    </ul>
+</div>
+
+<!-- ================= DISCLAIMER ================= -->
+<div class="section">
+    <i>
+        This report is generated by an AI-assisted screening system.
+        It does not constitute a medical diagnosis and does not replace
+        professional clinical judgment.
+    </i>
+</div>
+
+<div class="download">
+    <a href="/download-report?file={{ pdf_file }}">
+        <button>Download PDF Report</button>
+    </a>
+</div>
+
+</body>
+</html>

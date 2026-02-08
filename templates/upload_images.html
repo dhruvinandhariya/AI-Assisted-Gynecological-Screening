@@ -1,0 +1,16 @@
+<h2>Symptom Evaluation</h2>
+<p><b>{{ symptom_risk }}</b></p>
+
+<form action="/upload-images" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="symptom_score" value="{{ symptom_score }}">
+
+    <h3>Upload Imaging (Optional)</h3>
+
+    Ultrasound:
+    <input type="file" name="ultrasound"><br><br>
+
+    Endoscopy:
+    <input type="file" name="endoscopy"><br><br>
+
+    <button type="submit">Generate Report</button>
+</form>
